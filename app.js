@@ -76,6 +76,23 @@ router.get('/api/lyric', async (ctx, next) => {
   ctx.body = ret;
 });
 
+router.get('/api/search', async (ctx, next) => {
+  const url = 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp';
+  const ret = await axios.get(url, {
+    headers: {
+      referer: 'https://c.y.qq.com/',
+      host: 'c.y.qq.com'
+    },
+    params: ctx.query
+  }).then((res) => {
+    return res.data;
+  }).catch((err) => {
+    console.log(err);
+  })
+
+  ctx.body = ret;
+});
+
 // // 加载中间件
 app.use(bodyParser());
 debug && app.use(cors());
