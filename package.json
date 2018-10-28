@@ -1,0 +1,17 @@
+{
+  "name": "koa-music",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "i@wujingquan.com",
+  "license": "ISC",
+  "dependencies": {
+    "@koa/cors": "^2.2.2",
+    "axios": "^0.18.0",
+    "koa": "^2.6.1",
+    "koa-router": "^7.4.0"
+  }
+}
