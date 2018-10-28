@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const Router = require('koa-router');
+const bodyParser = require('koa-bodyparser');
 const axios = require('axios');
 const cors = require('@koa/cors');
 
@@ -7,18 +8,6 @@ const app = new Koa();
 const router = new Router();
 
 const debug = process.env.NODE_ENV !== 'production'
-
-router.get('/api/seller', (ctx, next) => {
-  ctx.body = { errno: 0, data: seller };
-});
-
-router.get('/api/goods', (ctx, next) => {
-  ctx.body = { errno: 0, data: goods };
-});
-
-router.get('/api/ratings', (ctx, next) => {
-  ctx.body = { errno: 0, data: ratings };
-});
 
 router.get('/api/getDiscList', async (ctx, next) => {
   const url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg';
@@ -37,20 +26,19 @@ router.get('/api/getDiscList', async (ctx, next) => {
   ctx.body = ret;
 });
 
-router.get('/api/getPurlUrl', async (ctx, next) => {
+router.post('/api/getPurlUrl', async (ctx, next) => {
   const url = 'https://u.y.qq.com/cgi-bin/musicu.fcg';
-  const ret = await axios.get(url, {
+  const ret = await axios.post(url, ctx.request.body, {
     headers: {
-      referer: 'https://c.y.qq.com/',
-      host: 'c.y.qq.com'
-    },
-    params: ctx.query
+      referer: 'https://y.qq.com/',
+      origin: 'https://y.qq.com',
+      'Content-type': 'application/x-www-form-urlencoded'
+    }
   }).then((res) => {
     return res.data;
   }).catch((err) => {
     console.log(err);
   })
-
   ctx.body = ret;
 });
 
@@ -72,6 +60,7 @@ router.get('/api/getCdInfo', async (ctx, next) => {
 });
 
 // // 加载中间件
+app.use(bodyParser());
 debug && app.use(cors());
 app.use(router.routes()).use(router.allowedMethods());
 
