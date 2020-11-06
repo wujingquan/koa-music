@@ -9,10 +9,10 @@
   "author": "i@wujingquan.com",
   "license": "ISC",
   "dependencies": {
-    "@koa/cors": "^2.2.2",
-    "axios": "^0.18.0",
-    "koa": "^2.6.1",
-    "koa-bodyparser": "^4.2.1",
-    "koa-router": "^7.4.0"
+    "@koa/cors": "^3.1.0",
+    "@koa/router": "^10.0.0",
+    "axios": "^0.21.0",
+    "koa": "^2.13.0",
+    "koa-bodyparser": "^4.3.0"
   }
 }
